@@ -1,10 +1,11 @@
 body {
-
+  font: Times;
 }
 
 #hnmain{
    border: 0;
    background-color: "#f6f6ef";
+   padding: ;
 }
 
 #header{
@@ -24,6 +25,7 @@ padding: 2px;
 #header3{
  line-height:12pt;
  height:10px;  
+ align-items: center;
 }
 
 #image1{
