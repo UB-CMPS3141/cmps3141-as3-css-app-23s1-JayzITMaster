@@ -1,43 +1,17 @@
 body {
   font: Times;
+  background-color: #f2ebe5;
+  font-size: 18;
 }
 
-#hnmain{
-   border: 0;
-   background-color: "#f6f6ef";
-   padding: ;
+#disclaimer{
+   text-align: center;
 }
 
-#header{
-  background-color: "#ff6600";
-
+#alignment{
+ text-align: center;
 }
 
-#header1{
-padding: 2px;
-}
-
-#header2{
-  width: 18px;
-  padding-right:4px;
-}
-
-#header3{
- line-height:12pt;
- height:10px;  
- align-items: center;
-}
-
-#image1{
- border:1px white solid;
- display:block;
-}
-
-#header4{
- text-align: right;
- padding-right: 4px;  
-}
-
-#pagespace{
- height:10px;   
+ul{
+  list-style-image: url('images/briefcase.jpg');   
 }
