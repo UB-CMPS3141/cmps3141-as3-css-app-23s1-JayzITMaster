@@ -4,6 +4,8 @@ Collaborators:
 Date: Sept.22.23
 */
 
+
+
 import { createApp } from "https://mavue.mavo.io/mavue.js";
 
 globalThis.app = createApp({
@@ -30,11 +32,33 @@ globalThis.app = createApp({
 			};
 
 			return amount * rates[to] / rates[from];
-		}
+		},
+
+		document:addEventListener("DOMContentLoaded", function () {
+
+
+			const addButton = document.getElementById("add-payment-button");
+			const fieldContainer = document.getElementById("field-container");
+
+			let fieldCount = 0;
+
+			addButton.addEventListener("click", function () {
+
+				fieldCount++;
+
+				const newFeild = document.createElement("input");
+				newFeild.type = "number";
+				newFeild.name = "dynamic-field-" + fieldCount;
+				newFeild.placeholder = "Field" + fieldCount;
+
+				fieldContainer.appendChild(newFeild);
+			});
+
+		}),
 	},
 
 	computed: {
-		total_balance () {
+		total_balance() {
 			let total = 0;
 
 			for (let expense of this.expenses) {
@@ -43,7 +67,7 @@ globalThis.app = createApp({
 				let trinity_paid_for_neo = expense.trinity_paid_for_neo ?? 0;
 				let neo_paid_for_trinity = expense.neo_paid_for_trinity ?? 0;
 
-				total += (trinity_paid - neo_paid)/2 + trinity_paid_for_neo - neo_paid_for_trinity;
+				total += (trinity_paid - neo_paid) / 2 + trinity_paid_for_neo - neo_paid_for_trinity;
 			}
 
 			return total;

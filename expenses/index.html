@@ -9,7 +9,8 @@ Date: Sept.22.23
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Expenses</title>
 	<link rel="stylesheet" href="style.css">
-	<script src="index.js"></script>
+	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+	<script src="https://get.mavo.io/mavo.js"></script>
 </head>
 <body>
 
@@ -53,23 +54,14 @@ Date: Sept.22.23
 				
 
 				<!---------Person receiving payment from payer--------------------->
-				<label>for the quantity of $<input type="number" property="amount" value="100" step="10" /></label>
+				<label>for the quantity of $<input type="number" id = "field-container" property="amount" value="100" step="10" /></label>
 
 				<!----Summary------>
-				<label>Payment Type | <span property="abalance">
-					[payer] : [payee]
-					[
-					if(payer=J && payee=A, "Neo owes " & (amount*0.5)),
-					if(payer=J) && payee=B, "Neo owes" & (ammount-amount),
-					if(payer=B) && payee=A, "Neo owes" & (amount),
-					if(payer=A) && payee=B, "Neo owes" & (amount-amount)
-					
-					]
-				</span></label>
-				<br><br>
+				
 			</label>
-			<button class="clear deleted" mv-action="delete(payment where remove)"> Remove selected payments</button>
-			<button class="add payment" mv-action="add(payment where add)">Add payment</button>
+			<button class="clear deleted" mv-action="delete(payment where remove)"> Remove selected payments</button> <br>
+			<button id="add-payment-button">Add Payment</button>
+			<!--button class="add payment" mv-action="add(payment where add)">Add payment</button--->
 		</li>
 	</ol>
 
@@ -80,8 +72,8 @@ Date: Sept.22.23
 			<span> $[sum((amount*0.5) + (amount-amount) + (amount - amount))] = </span>
 		</div>
 	</div>
-
+	
 </div>
-
+<script src="index.js"></script>
 </body>
 </html>
