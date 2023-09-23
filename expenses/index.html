@@ -9,8 +9,7 @@ Date: Sept.22.23
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Expenses</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
-	<script src="https://get.mavo.io/mavo.js"></script>
+	<script src="index.js"></script>
 </head>
 <body>
 
@@ -24,7 +23,7 @@ Date: Sept.22.23
 
 	<ol>
 		<li property="payment" mv-multiple>
-			<label>
+			<label id>
 				<!------Options for adding or removing payments----------->
 				<input property="remove" type="checkbox" />
 
@@ -54,13 +53,13 @@ Date: Sept.22.23
 				
 
 				<!---------Person receiving payment from payer--------------------->
-				<label>for the quantity of $<input type="number" id = "field-container" property="amount" value="100" step="10" /></label>
-
+				<label>for the quantity of $<input type="number" id = "numberInput" property="amount" value="100" /></label>
+                <br>
 				<!----Summary------>
 				
 			</label>
-			<button class="clear deleted" mv-action="delete(payment where remove)"> Remove selected payments</button> <br>
-			<button id="add-payment-button">Add Payment</button>
+			<button class="clear deleted" mv-action="delete(payment where remove)"> Remove selected payments</button> 
+			<button id="add-payment-button" @click >Add Payment</button>
 			<!--button class="add payment" mv-action="add(payment where add)">Add payment</button--->
 		</li>
 	</ol>
@@ -69,11 +68,11 @@ Date: Sept.22.23
 		<div class="total">
 			<hr>
 			<h1>Total amount Neo owes Trinity</h1>
-			<span> $[sum((amount*0.5) + (amount-amount) + (amount - amount))] = </span>
+			<span> $[total_balance()] </span>
 		</div>
 	</div>
 	
 </div>
-<script src="index.js"></script>
+
 </body>
 </html>

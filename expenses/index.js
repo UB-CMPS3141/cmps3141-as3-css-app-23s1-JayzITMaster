@@ -37,24 +37,24 @@ globalThis.app = createApp({
 		document:addEventListener("DOMContentLoaded", function () {
 
 
-			const addButton = document.getElementById("add-payment-button");
-			const fieldContainer = document.getElementById("field-container");
+				const addButton = document.getElementById("add-payment-button");
+				const fieldContainer = document.getElementById("field-container");
 
-			let fieldCount = 0;
+				let fieldCount = 0;
 
-			addButton.addEventListener("click", function () {
+				addButton.addEventListener("click", function () {
 
-				fieldCount++;
+					fieldCount++;
 
-				const newFeild = document.createElement("input");
-				newFeild.type = "number";
-				newFeild.name = "dynamic-field-" + fieldCount;
-				newFeild.placeholder = "Field" + fieldCount;
+					const newFeild = document.createElement("input");
+					newFeild.type = "number";
+					newFeild.name = "dynamic-field-" + fieldCount;
+					newFeild.placeholder = "Field" + fieldCount;
 
-				fieldContainer.appendChild(newFeild);
-			});
+					fieldContainer.appendChild(newFeild);
+				});
 
-		}),
+			}),
 	},
 
 	computed: {
