@@ -2,77 +2,163 @@
 Collaborators: Jahmur Lopez
 Date: Sept.22.23
  -->
+\
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Expenses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager</title>
 	<link rel="stylesheet" href="style.css">
-	<script src="index.js"></script>
 </head>
 <body>
-
-<div id="app">
-	<!-- Replace cmps3141-as3-css_app-23s1 below with your repo name (cmps3141-as3-css_app-23s1-yourusername) so you can save!  -->
-	<ma-data v-model="expenses" src="https://github.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-JayzITMaster/blob/main/expenses/data.json"></ma-data>
-	
-	<!-- App YOUR UI here -->
-	<h1>Joint Payment Calculator: Determine the total amount Neo owes trinity.</h1>
-	<h3>Select "Add Payment" to input a new payment</h3>
-
-	<ol>
-		<li property="payment" mv-multiple>
-			<label id>
-				<!------Options for adding or removing payments----------->
-				<input property="remove" type="checkbox" />
-
-				<!---------------Payment made by the payer------------------------->
-				<label for="payer">Payment made by</label>
-				<select property="payer" name="payer" id="payer" mv-default="A">
-					<option value="A">A:Neo</option>
-					<option value="B">B:Trinity</option>
-					<option value="J">Joint</option>
+    <div id="app">
+    <div class="container">
+    <section>       	<!-- App YOUR UI here -->
+	<center><h1>Joint Payment Calculator</h1>
+	<br>
+	<h3>Add expense details below, then select "Add Payment" to input a new tarnsaction</h3></section></center>
+	<br>
+	<hr><br>
+            <!-- Input fields for adding a new expense -->
+            <div class=" ">
+                <label for="expenseTitle">Expense Description: </label>
+                <input type="text" id="expenseTitle" v-model="newPayment.title">
+            </div>
+            <div class=" ">
+                <label for="expenseCost">Expense Amount: </label>
+                <input type="number" id="expenseCost" v-model="newPayment.amount">
+            </div>
+            <div class=" ">
+				<label for="payer"> Payment Made By:  </label>
+				<select property="payer" name="payer" id="payer" v-model="newPayment.payer">
+					<option value="N">Neo</option>
+					<option value="T">Trinity</option>
+					<option value="Joint">Joint</option>
 				</select>
-
-				<!--------------Payment made by the payer-------------------------->
-				<label for="payee" name="payee" id="payee" mv-default="B">for</label>
-				<select property="payee" name="payee" id="payee" mv-default="B">
-					<option value="A">A:Neo</option>
-					<option value="B">B:Trinity</option>
+            </div>
+            <div class=" ">
+				<label for="payee"> Payment Made For:  </label>
+				<select property="payee" name="payee" id="payee" v-model="newPayment.payee">
+					<option value="N">Neo</option>
+					<option value="T">Trinity</option>
+					<option value="Joint">Joint</option>
 				</select>
-
-				<!----------Person receiving payment from payer-------------------->
-				<label for="payee">for</label>
-				<select property="payee" name="payee" id="payee" mv-default="B">
-					<option value="A">A:Neo</option>
-					<option value="B">B:Trinity</option>
-				</select>
-
-				<!----------The joint card paid for a personal expense-------------------->
-				
-
-				<!---------Person receiving payment from payer--------------------->
-				<label>for the quantity of $<input type="number" id = "numberInput" property="amount" value="100" /></label>
-                <br>
-				<!----Summary------>
-				
-			</label>
-			<button class="clear deleted" mv-action="delete(payment where remove)"> Remove selected payments</button> 
-			<button id="add-payment-button" @click >Add Payment</button>
-			<!--button class="add payment" mv-action="add(payment where add)">Add payment</button--->
-		</li>
-	</ol>
-
-	<div class="outputs">
-		<div class="total">
-			<hr>
-			<h1>Total amount Neo owes Trinity</h1>
-			<span> $[total_balance()] </span>
-		</div>
-	</div>
-	
-</div>
-
+            </div>
+            <div class=" ">
+                <label for="expenseDate">Expense Date:</label>
+                <input type="date" id="expenseDate" v-model="newPayment.date">
+            </div>
+            <div class=" ">
+                <label for="expenseCurrency">Expense Currency:</label>
+                <select id="expenseCurrency" v-model="newPayment.currency">
+                    <option value="BZD">BZD</option>
+                    <option value="MXN">MXN</option>
+                    <option value="GTQ">GTQ</option>
+                </select>
+            </div>
+			<br>
+            <!-- Button to add the new expense -->
+            <button @click="addExpense" id="addBtn">Add Payment</button>
+        </div>
+	</section>
+	<br>
+	<hr><br>
+        <!-- Trinity's Expenses Table -->
+        <div class="container">
+            <center><h3>Trinity's Expenses</h3></center>
+            <table id="trinity-table">
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="expense in trinityExpenses" :key="expense.title">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br>
+		<hr><br>
+        <!-- Neo's Expenses Table -->
+        <div class="container">
+            <center><h3>Neo's Expenses</h3></center>
+            <table id="neo-table">
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="expense in neoExpenses" :key="expense.title">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br>
+		<hr><br>
+        <!-- Joint Expenses Table -->
+        <div class="container">
+            <center><h3>Your Joint Expenses</h3></center>
+            <table id="joint-table">
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="expense in jointExpenses" :key="expense.title">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br>
+		<hr><br>
+        <!-- Total expenses calculations -->
+        <div class="container">
+            <h2>Total Balances</h2>
+            <p>Trinity's Total Expenses: <strong>${{ trinity_balance }} BZD</strong></p>
+            <p>Neo's Total Expenses: <strong>${{ neo_balance }} BZD</strong></p>
+            <p>Your Joint Account's Total Expenses: <strong>${{ joint_balance }} BZD</strong></p>
+            <p v-if="neo_owes_trinity > 0">Neo owes Trinity: <strong>${{ neo_owes_trinity }} BZD</strong></p>
+            <p v-if="trinity_owes_neo > 0">Trinity owes Neo: <strong>${{ trinity_owes_neo }} BZD</strong></p>
+            <p v-if="trinity_pays_for_joint > 0">Trinity needs to collect <strong>${{ trinity_pays_for_joint }} BZD</strong> from the joint account</p>
+            <p v-if="neo_pays_for_joint > 0">Neo needs to collect <strong>${{ neo_pays_for_joint }} BZD</strong> from the joint account</p>
+        </div>
+    </div>
+    <script src="https://mavue.mavo.io/mavue.js"></script>
+    <script src="index.js" type="module"></script>
 </body>
 </html>

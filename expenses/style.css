@@ -3,3 +3,69 @@ CMPS3141-HCI - AS3-23S1
 Collaborators:
 Date: Sept.22.23
 */
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:100);
+* {
+  margin: 0;
+}
+
+html {
+  background: #caff70 !important;
+  font-size: 18px;
+}
+
+body {
+  text-align: justify;
+  padding: 1.5em;
+}
+
+h1 {
+  font: 100 200% "Helvetica Neue", Raleway, sans-serif;
+  font-weight: bold;
+}
+
+a {
+  color: inherit;
+}
+a:not(:hover) {
+  text-decoration: none;
+}
+
+body > header {
+  width: 64em;
+  padding: 1em;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+button {
+  cursor: pointer;
+}
+
+#addBtn {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5em 1em;
+  margin: 1em auto;
+  border-radius: 0.3em;
+  background: white;
+  font: bold 120%/1 heading-font;
+  font-size: 120%;
+  margin-bottom: 0.5em;
+  border: 0;
+}
+
+table, td, th {
+  border: 1px solid;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr:hover {background-color: coral;}
+
+input{ border: none; border-radius:10px;}
